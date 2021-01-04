@@ -12,10 +12,9 @@ server.use(express.json());
 server.use(helmet());
 server.use(cors());
 
-// .use usersRouter
-// .use authRouter
+server.use('/auth', authRouter);
+server.use('/api/users', usersRouter);
 server.use('/api/posts', postsRouter);
-// need authenticate middleware
 
 server.get('/', (req, res) => {
 	res.json({ api: 'running' });
