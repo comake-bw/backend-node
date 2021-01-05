@@ -8,8 +8,8 @@ const makeToken = require('./makeToken');
 
 // MIDDLEWARE
 const validateCredentials = require('../middleware/validateCredentials');
-const { findByZipCode } = require('../locations/locations-model');
 
+// 🌕   REGISTER
 router.post('/register', validateCredentials, async (req, res) => {
 	//password
 	const rounds = process.env.BCRYPT_ROUNDS || 10;
@@ -21,7 +21,7 @@ router.post('/register', validateCredentials, async (req, res) => {
 	if (location === undefined) {
 		await Locations.add(req.user.zipCode);
 	}
-	const newLocation = await findByZipCode(req.user.zipCode);
+	const newLocation = await Locations.findByZipCode(req.user.zipCode);
 	req.user.location_id = newLocation.location_id;
 	delete req.user.zipCode;
 	try {
@@ -33,17 +33,34 @@ router.post('/register', validateCredentials, async (req, res) => {
 	}
 });
 
+// 🌕   LOGIN
 router.post('/login', validateCredentials, async (req, res) => {
 	try {
 		const user = await Users.findBy({ username: req.user.username });
 		if (user && bcrypt.compareSync(req.user.password, user.password)) {
 			const token = makeToken(user);
+			process.env.USERNAME = user.username;
+			process.env.USER_ID = user.user_id;
+			process.env.LOCATION_ID = user.location_id;
 			res
 				.status(200)
 				.json({ message: `welcome ${user.username}`, token: token });
 		} else {
 			res.status(401).json({ errMessage: 'invalid credentials' });
 		}
+	} catch (err) {
+		console.log(err.message);
+		res.status(500).json({ errMessage: err.message });
+	}
+});
+
+// 🌕   LOGOUT
+router.post('/logout', validateCredentials, async (req, res) => {
+	try {
+		process.env.USERNAME = '';
+		process.env.USER_ID = 0;
+		process.env.LOCATION_ID = 0;
+		res.status(200).json({ message: 'logout successful' });
 	} catch (err) {
 		console.log(err.message);
 		res.status(500).json({ errMessage: err.message });

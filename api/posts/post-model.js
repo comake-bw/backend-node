@@ -38,4 +38,19 @@ module.exports = {
 			.select('l.post_id', 'p.description', 'u.username')
 			.where('u.username', username);
 	},
+
+	// 🌕   [POST] - create post
+	async add(post) {
+		return db('posts').insert(post);
+	},
+
+	// 🌕   [PUT] - update post
+	async update(postId, change) {
+		return db('posts').where({ postId }).update(change);
+	},
+
+	// 🌕   [DELETE] - delete post
+	async remove(postId) {
+		return db('posts').where({ postId }).del();
+	},
 };

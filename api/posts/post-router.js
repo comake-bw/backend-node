@@ -1,6 +1,8 @@
 const router = require('express').Router();
 
 const Posts = require('./post-model');
+
+// middleware
 const restricted = require('../middleware/restricted');
 
 // 🌕   [GET] - all posts globally
@@ -62,10 +64,46 @@ router.get('/u/:username/liked', restricted, async (req, res) => {
 	}
 });
 
-// add post
+// 🌕   [POST] - create post
+router.post('/p/create', restricted, async (req, res) => {
+	const { description, imageUrl } = req.body;
+	try {
+		const newPost = await Posts.add({
+			description: description,
+			imageUrl: imageUrl,
+			user_id: parseInt(process.env.USER_ID),
+			location_id: parseInt(process.env.LOCATION_ID),
+		});
+		res.status(201).json(newPost);
+	} catch (err) {
+		console.log(err.message);
+		res.status(500).json({ errMessage: err.message });
+	}
+});
 
-// edit post
+// 🌕   [PUT] - update post
+router.put('/p/:postId', restricted, async (req, res) => {
+	const { postId } = req.params;
+	const changes = req.body;
+	try {
+		const updatedPost = await Posts.update(postId, changes);
+		res.status(200).json(updatedPost);
+	} catch (err) {
+		console.log(err.message);
+		res.status(500).json({ errMessage: err.message });
+	}
+});
 
-// delete post
+// 🌕   [DELETE] - delete post
+router.delete('/p/:postId', restricted, async (req, res) => {
+	const { postId } = req.params;
+	try {
+		await Posts.remove(postId);
+		res.status(200).json({ message: `post with id ${postId} deleted` });
+	} catch (err) {
+		console.log(err.message);
+		res.status(500).json({ errMessage: err.message });
+	}
+});
 
 module.exports = router;
