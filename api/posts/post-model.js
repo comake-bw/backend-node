@@ -46,11 +46,11 @@ module.exports = {
 
 	// 🌕   [PUT] - update post
 	async update(postId, change) {
-		return db('posts').where({ postId }).update(change);
+		return db('posts').where({ post_id: postId }).update(change);
 	},
 
 	// 🌕   [DELETE] - delete post
 	async remove(postId) {
-		return db('posts').where({ postId }).del();
+		return db('posts').where({ post_id: postId }).del();
 	},
 };
