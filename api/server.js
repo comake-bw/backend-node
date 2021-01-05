@@ -16,7 +16,7 @@ server.use('/auth', authRouter);
 server.use('/api/users', usersRouter);
 server.use('/api/posts', postsRouter);
 
-server.get('/', (req, res) => {
+server.get('/', (_, res) => {
 	res.json({ api: 'running' });
 });
 
