@@ -1,5 +1,7 @@
 const db = require('../../data/dbConfig');
 
+const Locations = require('../locations/locations-model');
+
 module.exports = {
 	find,
 	findById,
@@ -12,8 +14,8 @@ function find() {
 	return db('users');
 }
 
-function findById(id) {
-	return db('users').where({ id }).first();
+function findById(user_id) {
+	return db('users').where({ user_id }).first();
 }
 
 function findBy(key) {
@@ -21,11 +23,12 @@ function findBy(key) {
 }
 
 async function add(user) {
-	const [id] = await db('users').insert(user, 'id');
-	return findById(id);
+	const [user_id] = await db('users').insert(user, 'user_id');
+	return findById(user_id);
 }
 
-async function remove(user) {
-	const [id] = await db('users').delete(user, 'id');
-	return findById(id);
+//messy
+async function remove(username) {
+	const [user_id] = await db('users').delete(username, 'username');
+	return findById(user_id);
 }
