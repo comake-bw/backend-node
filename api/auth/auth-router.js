@@ -55,7 +55,7 @@ router.post('/login', validateCredentials, async (req, res) => {
 });
 
 // 🌕   LOGOUT
-router.post('/logout', validateCredentials, async (req, res) => {
+router.post('/logout', validateCredentials, async (_, res) => {
 	try {
 		process.env.USERNAME = '';
 		process.env.USER_ID = 0;

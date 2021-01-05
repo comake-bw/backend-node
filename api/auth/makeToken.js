@@ -8,7 +8,7 @@ const makeToken = (user) => {
 		department: user.department,
 	};
 	const options = {
-		expiresIn: '900s',
+		expiresIn: '24hr',
 	};
 	return jwt.sign(payload, jwtSecret, options);
 };
