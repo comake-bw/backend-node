@@ -6,6 +6,17 @@ There are two versions of the backend for this project. This repo contains only 
 
 ---
 
+### Auth
+
+url: `/auth`
+
+| Method | url       | parameters | payload                                                    | returns                                               |
+| :----: | --------- | ---------- | ---------------------------------------------------------- | ----------------------------------------------------- |
+| `POST` | /register | -          | { (string) username, (string) password, (string) zipCode } | adds user, returns new user                           |
+| `POST` | /login    | -          | { (string) username, (string) password }                   | logs in user, returns success message including token |
+
+---
+
 ### Posts (Issues)
 
 url: `/api/posts`
@@ -27,10 +38,10 @@ url: `/api/posts`
 
 url: `/api/likes`
 
-| Method | url     | parameters | payload           | returns                |
-| :----: | ------- | ---------- | ----------------- | ---------------------- |
-| `POST` | /like   | -          | { (int) post_id } | liked post             |
-| `POST` | /unlike | -          | { (int) post_id } | unlike success message |
+|  Method  | url     | parameters | payload           | returns                |
+| :------: | ------- | ---------- | ----------------- | ---------------------- |
+|  `POST`  | /like   | -          | { (int) post_id } | liked post             |
+| `DELETE` | /unlike | -          | { (int) post_id } | unlike success message |
 
 ---
 

@@ -7,9 +7,9 @@ const restricted = require('../middleware/restricted');
 
 // 🌕   [POST] - like post
 router.post('/like', restricted, async (req, res) => {
-	const { postId } = req.body;
+	const { post_id } = req.body;
 	try {
-		const like = await Likes.addLike(postId, process.env.USER_ID);
+		const like = await Likes.addLike(post_id, process.env.USER_ID);
 		res.status(201).json(like);
 	} catch (err) {
 		console.log(err.message);
@@ -19,10 +19,10 @@ router.post('/like', restricted, async (req, res) => {
 
 // 🌕   [DELETE] - delete post
 router.delete('/unlike', restricted, async (req, res) => {
-	const { postId } = req.body;
+	const { post_id } = req.body;
 	try {
-		await Likes.removeLike(postId, process.env.USER_ID);
-		res.status(200).json({ message: `post with id ${postId} unliked` });
+		await Likes.removeLike(post_id, process.env.USER_ID);
+		res.status(200).json({ message: `post with id ${post_id} unliked` });
 	} catch (err) {
 		console.log(err.message);
 		res.status(500).json({ errMessage: err.message });
