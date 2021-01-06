@@ -1,57 +1,24 @@
 # Comake Node Database
 
-There are two versions of the backend for this project. This repo contains only the version created with Node.js
+There are two versions of the backend for this project. This repo contains only the version created with Node.js.
 
 ## Endpoints
 
+---
+
 ### Posts (Issues)
 
-/api/posts
+url: `/api/posts`
 
-`GET` /
-
-returns all posts
-
----
-
-`GET` /z/:zipCode
-
-returns all posts for a single location
-
----
-
-`GET` /u/:username
-
-returns all posts by a single user
+|  Method  | url                | parameters        | payload                                     | returns                               |
+| :------: | ------------------ | ----------------- | ------------------------------------------- | ------------------------------------- |
+|  `GET`   | /                  | -                 | -                                           | all posts                             |
+|  `GET`   | /z/:zipCode        | (string) zip code | -                                           | all posts for single location         |
+|  `GET`   | /u/:username       | (string) username | -                                           | all posts by single user              |
+|  `GET`   | /p/:postId/likes   | (int) post_id     | -                                           | all likes on a single post            |
+|  `GET`   | /u/:username/likes | (string) username | -                                           | all posts liked by single user        |
+|  `POST`  | /p/create          | -                 | { (string) description, (string) imageUrl } | creates new post, returns post        |
+|  `PUT`   | /p/:postId         | (int) post_id     | whichever from above needs updated          | updates post, returns post            |
+| `DELETE` | /p/:postId         | (int) post_id     | -                                           | deletes post, returns success message |
 
 ---
-
-`GET` /p/:postId/likes
-
-returns all likes on a single post
-
----
-
-`GET` /u/:username/liked
-
-returns all posts like by a single user
-
----
-
-`POST` /p/create
-
-payload: description, imageUrl
-
-creates new post, returns post
-
----
-
-`PUT` /p/:postId
-
-payload: description, imageUrl (whichever needs updated)
-
----
-
-`DELETE` /p/:postId
-
-deletes post, returns success message
