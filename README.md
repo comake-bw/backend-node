@@ -33,3 +33,13 @@ url: `/api/likes`
 | `POST` | /unlike | -          | { (int) post_id } | unlike success message |
 
 ---
+
+### Users
+
+url: `/api/users`
+
+|  Method  | url        | parameters     | payload | returns                               |
+| :------: | ---------- | -------------- | ------- | ------------------------------------- |
+| `DELETE` | /:username | (int) username | -       | deletes user, returns success message |
+
+---

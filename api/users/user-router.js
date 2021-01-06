@@ -3,7 +3,7 @@ const router = require('express').Router();
 const Users = require('./user-model');
 const restricted = require('../middleware/restricted');
 
-// add user
+// delete user
 router.delete('/:username', restricted, async (req, res) => {
 	const { username } = req.params;
 	try {
@@ -13,7 +13,5 @@ router.delete('/:username', restricted, async (req, res) => {
 		res.status(500).json({ errMessage: err.message });
 	}
 });
-
-// delete user
 
 module.exports = router;
