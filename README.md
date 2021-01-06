@@ -22,3 +22,14 @@ url: `/api/posts`
 | `DELETE` | /p/:postId         | (int) post_id     | -                                           | deletes post, returns success message |
 
 ---
+
+### Likes
+
+url: `/api/likes`
+
+| Method | url     | parameters | payload           | returns                |
+| :----: | ------- | ---------- | ----------------- | ---------------------- |
+| `POST` | /like   | -          | { (int) post_id } | liked post             |
+| `POST` | /unlike | -          | { (int) post_id } | unlike success message |
+
+---
