@@ -10,7 +10,7 @@ const likesRouter = require('./likes/like-router');
 const server = express();
 
 server.use(helmet());
-server.use(cors());
+server.use(cors({ origin: '*' }));
 server.use(express.json());
 
 server.use('/auth', authRouter);
