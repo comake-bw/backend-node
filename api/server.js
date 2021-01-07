@@ -1,13 +1,13 @@
-const helmet = require('helmet');
-const cors = require('cors');
 const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+
+const server = express();
 
 const usersRouter = require('./users/user-router');
 const authRouter = require('./auth/auth-router');
 const postsRouter = require('./posts/post-router');
 const likesRouter = require('./likes/like-router');
-
-const server = express();
 
 server.use(helmet());
 server.use(cors({ origin: '*' }));
