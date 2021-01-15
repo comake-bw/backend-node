@@ -42,13 +42,11 @@ router.post('/login', validateCredentials, async (req, res) => {
 			process.env.USERNAME = user.username;
 			process.env.USER_ID = user.user_id;
 			process.env.LOCATION_ID = user.location_id;
-			res
-				.status(200)
-				.json({
-					message: `welcome ${user.username}`,
-					user: user.username,
-					token: token,
-				});
+			res.status(200).json({
+				message: `welcome ${user.username}`,
+				user: user.username,
+				token: token,
+			});
 		} else {
 			res.status(401).json({ errMessage: 'invalid credentials' });
 		}
