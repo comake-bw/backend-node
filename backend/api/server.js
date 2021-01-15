@@ -19,7 +19,7 @@ server.use('/api/posts', postsRouter);
 server.use('/api/likes', likesRouter);
 
 server.get('/', (_, res) => {
-	res.json({ api: 'running' });
+	res.json({ api: 'api running' });
 });
 
 module.exports = server;
